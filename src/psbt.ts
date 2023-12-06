@@ -146,7 +146,7 @@ export function updatePsbt({
   vout: number;
   txHex?: string;
   txId?: string;
-  value?: number;
+  value?: bigint;
   sequence: number | undefined;
   locktime: number | undefined;
   keysInfo: KeyInfo[];
@@ -165,7 +165,7 @@ export function updatePsbt({
   )
     throw new Error(`Error: pass txHex or txId+value for Segwit inputs`);
   if (txHex !== undefined) {
-    const tx = Transaction.fromHex(txHex);
+    const tx = Transaction.fromHex<bigint>(txHex, 'bigint');
     const out = tx?.outs?.[vout];
     if (!out) throw new Error(`Error: tx ${txHex} does not have vout ${vout}`);
     const outputScript = out.script;

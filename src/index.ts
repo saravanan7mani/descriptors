@@ -68,23 +68,6 @@ function finalizePsbt({
 
 export { finalizePsbt };
 
-export { keyExpressionBIP32, keyExpressionLedger } from './keyExpressions';
+export { keyExpressionBIP32 } from './keyExpressions';
 import * as scriptExpressions from './scriptExpressions';
 export { scriptExpressions };
-
-import {
-  LedgerState,
-  getLedgerMasterFingerPrint,
-  getLedgerXpub,
-  registerLedgerWallet,
-  assertLedgerApp,
-  LedgerManager
-} from './ledger';
-export const ledger = {
-  getLedgerMasterFingerPrint,
-  getLedgerXpub,
-  registerLedgerWallet,
-  assertLedgerApp
-};
-
-export type { LedgerState, LedgerManager };

@@ -10,8 +10,8 @@
 import { networks, Psbt } from 'bitcoinjs-lib';
 import { DescriptorsFactory, OutputInstance } from '../dist';
 import fixturesVsize from './fixtures/vsize.json'; // Fixture from @bitcoinerlab/coinselect
-import * as secp256k1 from '@bitcoinerlab/secp256k1';
-const { Output } = DescriptorsFactory(secp256k1);
+import { ecc } from '@bitgo-beta/secp256k1';
+const { Output } = DescriptorsFactory(ecc);
 import type { PartialSig } from 'bip174/src/lib/interfaces';
 import { encodingLength } from 'varuint-bitcoin';
 

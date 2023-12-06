@@ -17,7 +17,7 @@ const FINAL_ADDRESS = regtestUtils.RANDOM_ADDRESS;
 const SOFT_MNEMONIC =
   'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
 
-import * as ecc from '@bitcoinerlab/secp256k1';
+import { ecc } from '@bitgo-beta/secp256k1';
 import {
   DescriptorsFactory,
   scriptExpressions,
@@ -89,7 +89,7 @@ const expressionsECPair = [
         psbt: tmpPsbtSegwit,
         vout,
         txId,
-        value: INITIAL_VALUE
+        value: BigInt(INITIAL_VALUE)
       });
       const indexSegwit = tmpPsbtSegwit.data.inputs.length - 1;
       if (capturedOutput !== 'Warning: missing txHex may allow fee attacks')
@@ -109,7 +109,7 @@ const expressionsECPair = [
     new Output({
       descriptor: `addr(${FINAL_ADDRESS})`,
       network: NETWORK
-    }).updatePsbtAsOutput({ psbt, value: FINAL_VALUE });
+    }).updatePsbtAsOutput({ psbt, value: BigInt(FINAL_VALUE) });
     signBIP32({ psbt, masterNode });
     inputFinalizer({ psbt });
     const spendTx = psbt.extractTransaction();
@@ -160,7 +160,7 @@ const expressionsECPair = [
     new Output({
       descriptor: `addr(${FINAL_ADDRESS})`,
       network: NETWORK
-    }).updatePsbtAsOutput({ psbt: psbtECPair, value: FINAL_VALUE });
+    }).updatePsbtAsOutput({ psbt: psbtECPair, value: BigInt(FINAL_VALUE) });
     signECPair({ psbt: psbtECPair, ecpair });
     inputFinalizer({ psbt: psbtECPair });
     const spendTxECPair = psbtECPair.extractTransaction();
@@ -194,7 +194,7 @@ const expressionsECPair = [
   new Output({
     descriptor: `addr(${FINAL_ADDRESS})`,
     network: NETWORK
-  }).updatePsbtAsOutput({ psbt: psbtMultiInputs, value: FINAL_VALUE });
+  }).updatePsbtAsOutput({ psbt: psbtMultiInputs, value: BigInt(FINAL_VALUE) });
   //Sign and finish psbtMultiInputs
   signECPair({ psbt: psbtMultiInputs, ecpair });
   signBIP32({ psbt: psbtMultiInputs, masterNode });

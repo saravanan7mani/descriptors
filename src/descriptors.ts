@@ -1171,7 +1171,7 @@ export function DescriptorsFactory(ecc: TinySecp256k1Interface) {
       psbt: Psbt;
       txHex?: string;
       txId?: string;
-      value?: number;
+      value?: bigint;
       vout: number;
     }) {
       this.updatePsbtAsInput(params);
@@ -1212,7 +1212,7 @@ export function DescriptorsFactory(ecc: TinySecp256k1Interface) {
       psbt: Psbt;
       txHex?: string;
       txId?: string;
-      value?: number;
+      value?: bigint;
       vout: number;
     }) {
       if (txHex === undefined) {
@@ -1260,7 +1260,7 @@ export function DescriptorsFactory(ecc: TinySecp256k1Interface) {
      * @param psbt - The Partially Signed Bitcoin Transaction.
      * @param value - The value for the output in satoshis.
      */
-    updatePsbtAsOutput({ psbt, value }: { psbt: Psbt; value: number }) {
+    updatePsbtAsOutput({ psbt, value }: { psbt: Psbt; value: bigint }) {
       psbt.addOutput({ script: this.getScriptPubKey(), value });
     }
 

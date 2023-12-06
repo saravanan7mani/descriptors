@@ -25,7 +25,7 @@ console.log(
   `Miniscript integration tests: ${POLICY.toString().match(/`([^`]*)`/)![1]}`
 );
 
-import * as ecc from '@bitcoinerlab/secp256k1';
+import { ecc } from '@bitgo-beta/secp256k1';
 import { DescriptorsFactory, keyExpressionBIP32, signers } from '../../dist/';
 import { compilePolicy } from '@bitcoinerlab/miniscript';
 const { signBIP32, signECPair } = signers;
@@ -126,7 +126,10 @@ const keys: {
         const { txHex } = await regtestUtils.fetch(txId);
         const psbt = new Psbt();
         const index = descriptor.updatePsbt({ psbt, vout, txHex });
-        psbt.addOutput({ script: FINAL_SCRIPTPUBKEY, value: FINAL_VALUE });
+        psbt.addOutput({
+          script: FINAL_SCRIPTPUBKEY,
+          value: BigInt(FINAL_VALUE)
+        });
         if (keyExpressionType === 'BIP32') signBIP32({ masterNode, psbt });
         else signECPair({ ecpair, psbt });
         descriptor.finalizePsbtInput({ index, psbt });

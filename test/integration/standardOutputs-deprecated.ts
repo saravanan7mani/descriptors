@@ -17,7 +17,7 @@ const FINAL_SCRIPTPUBKEY = address.toOutputScript(FINAL_ADDRESS, NETWORK);
 const SOFT_MNEMONIC =
   'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
 
-import * as ecc from '@bitcoinerlab/secp256k1';
+import { ecc } from '@bitgo-beta/secp256k1';
 import {
   DescriptorsFactory,
   DescriptorInstance,
@@ -89,7 +89,7 @@ const expressionsECPair = [
         psbt: tmpPsbtSegwit,
         vout,
         txId,
-        value: INITIAL_VALUE
+        value: BigInt(INITIAL_VALUE)
       });
       if (capturedOutput !== 'Warning: missing txHex may allow fee attacks')
         throw new Error(`Error: did not warn about fee attacks`);
@@ -103,7 +103,7 @@ const expressionsECPair = [
           `Error: could not create same psbt ${nonFinalTxHex} for Segwit not using txHex: ${nonFinalSegwitTxHex}`
         );
     }
-    psbt.addOutput({ script: FINAL_SCRIPTPUBKEY, value: FINAL_VALUE });
+    psbt.addOutput({ script: FINAL_SCRIPTPUBKEY, value: BigInt(FINAL_VALUE) });
     signBIP32({ psbt, masterNode });
     descriptorBIP32.finalizePsbtInput({ index, psbt });
     const spendTx = psbt.extractTransaction();
@@ -148,7 +148,10 @@ const expressionsECPair = [
       vout,
       txHex
     });
-    psbtECPair.addOutput({ script: FINAL_SCRIPTPUBKEY, value: FINAL_VALUE });
+    psbtECPair.addOutput({
+      script: FINAL_SCRIPTPUBKEY,
+      value: BigInt(FINAL_VALUE)
+    });
     signECPair({ psbt: psbtECPair, ecpair });
     descriptorECPair.finalizePsbtInput({
       index: indexECPair,
@@ -179,7 +182,10 @@ const expressionsECPair = [
     multiInputsDescriptors[ecpairIndex] = descriptorECPair;
   }
 
-  psbtMultiInputs.addOutput({ script: FINAL_SCRIPTPUBKEY, value: FINAL_VALUE });
+  psbtMultiInputs.addOutput({
+    script: FINAL_SCRIPTPUBKEY,
+    value: BigInt(FINAL_VALUE)
+  });
   //Sign and finish psbtMultiInputs
   signECPair({ psbt: psbtMultiInputs, ecpair });
   signBIP32({ psbt: psbtMultiInputs, masterNode });

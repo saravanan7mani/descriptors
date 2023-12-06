@@ -24,7 +24,7 @@ console.log(
   `Miniscript integration tests: ${POLICY.toString().match(/`([^`]*)`/)![1]}`
 );
 
-import * as ecc from '@bitcoinerlab/secp256k1';
+import { ecc } from '@bitgo-beta/secp256k1';
 import { DescriptorsFactory, keyExpressionBIP32, signers } from '../../dist/';
 import { compilePolicy } from '@bitcoinerlab/miniscript';
 const { signBIP32, signECPair } = signers;
@@ -133,7 +133,7 @@ const keys: {
         new Output({
           descriptor: `addr(${FINAL_ADDRESS})`,
           network: NETWORK
-        }).updatePsbtAsOutput({ psbt, value: FINAL_VALUE });
+        }).updatePsbtAsOutput({ psbt, value: BigInt(FINAL_VALUE) });
         if (keyExpressionType === 'BIP32') signBIP32({ masterNode, psbt });
         else signECPair({ ecpair, psbt });
         inputFinalizer({ psbt });

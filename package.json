@@ -1,13 +1,13 @@
 {
-  "name": "@bitcoinerlab/descriptors",
+  "name": "@saravanan7mani/descriptors",
   "description": "This library parses and creates Bitcoin Miniscript Descriptors and generates Partially Signed Bitcoin Transactions (PSBTs). It provides PSBT finalizers and signers for single-signature, BIP32 and Hardware Wallets.",
   "homepage": "https://github.com/bitcoinerlab/descriptors",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Jose-Luis Landabaso",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitcoinerlab/descriptors.git"
+    "url": "git+https://github.com/saravanan7mani/descriptors.git"
   },
   "keywords": [
     "bitcoin",
@@ -16,7 +16,7 @@
     "miniscript"
   ],
   "bugs": {
-    "url": "https://github.com/bitcoinerlab/descriptors/issues"
+    "url": "https://github.com/saravanan7mani/descriptors/issues"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -37,41 +37,29 @@
     "lint": "eslint --ignore-path .gitignore --ext .ts src/ test/",
     "ensureTester": "./node_modules/@bitcoinerlab/configs/scripts/ensureTester.sh",
     "test:integration:soft": "npm run ensureTester && node test/integration/standardOutputs.js && echo \"\\n\\n\" && node test/integration/miniscript.js",
-    "test:integration:ledger": "npm run ensureTester && node test/integration/ledger.js",
-    "test:integration:deprecated": "npm run ensureTester && node test/integration/standardOutputs-deprecated.js && echo \"\\n\\n\" && node test/integration/miniscript-deprecated.js && echo \"\\n\\n\" && node test/integration/ledger-deprecated.js",
+    "test:integration:deprecated": "npm run ensureTester && node test/integration/standardOutputs-deprecated.js && echo \"\\n\\n\" && node test/integration/miniscript-deprecated.js && echo \"\\n\\n\"",
     "test:unit": "jest",
     "test": "npm run lint && npm run build && npm run test:unit && npm run test:integration:soft",
-    "testledger": "npm run lint && npm run build && npm run test:integration:ledger",
-    "prepublishOnly": "npm run test && echo \"\\n\\n\" && npm run test:integration:deprecated && npm run test:integration:ledger"
+    "prepublishOnly": "npm run test && echo \"\\n\\n\" && npm run test:integration:deprecated"
   },
   "files": [
     "dist"
   ],
-  "peerDependencies": {
-    "ledger-bitcoin": "^0.2.2"
-  },
-  "peerDependenciesMeta": {
-    "ledger-bitcoin": {
-      "optional": true
-    }
-  },
   "devDependencies": {
     "@bitcoinerlab/configs": "github:bitcoinerlab/configs",
-    "@ledgerhq/hw-transport-node-hid": "^6.27.12",
     "@types/lodash.memoize": "^4.1.9",
     "bip39": "^3.0.4",
     "bip65": "^1.0.3",
     "bip68": "^1.0.4",
-    "ledger-bitcoin": "^0.2.2",
     "regtest-client": "^0.2.0",
     "yargs": "^17.7.2"
   },
   "dependencies": {
     "@bitcoinerlab/miniscript": "^1.2.1",
-    "@bitcoinerlab/secp256k1": "^1.0.5",
+    "@bitgo-beta/secp256k1": "^1.0.2-beta.217",
     "bip32": "^4.0.0",
-    "bitcoinjs-lib": "^6.1.3",
-    "ecpair": "^2.1.0",
+    "bitcoinjs-lib": "npm:@bitgo-forks/bitcoinjs-lib@7.1.0-master.7",
+    "ecpair": "npm:@bitgo/ecpair@2.1.0-rc.0",
     "lodash.memoize": "^4.1.2",
     "varuint-bitcoin": "^1.1.2"
   }

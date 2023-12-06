@@ -9,7 +9,7 @@
 import { DescriptorsFactory } from '../dist';
 import { fixtures as customFixtures } from './fixtures/custom';
 import { fixtures as bitcoinCoreFixtures } from './fixtures/bitcoinCore';
-import * as ecc from '@bitcoinerlab/secp256k1';
+import { ecc } from '@bitgo-beta/secp256k1';
 const { Descriptor, expand } = DescriptorsFactory(ecc);
 
 function partialDeepEqual(obj) {
